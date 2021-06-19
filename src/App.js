@@ -1,25 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import { ThemeContextProvider } from 'contexts/ThemeContext';
+import useColorScheme from 'hooks/useColorScheme';
+import { COLOR_SCHEME_THEME_MAP } from 'constants/theme';
+import MainContainer from 'components/MainContainer';
+import DarkModeToggle from 'components/DarkModeToggle';
 
-function App() {
+const App = () => {
+  const colorScheme = useColorScheme();
+  const themeName = COLOR_SCHEME_THEME_MAP[colorScheme];
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeContextProvider themeName={themeName}>
+      <MainContainer>
+        <DarkModeToggle />
+        CHESS
+      </MainContainer>
+    </ThemeContextProvider>
   );
-}
+};
 
 export default App;
